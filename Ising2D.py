@@ -14,9 +14,10 @@ n1, n2, n3, n4 = get_neighbors(L)
 # Condición inicial aleatoria
 s = np.random.choice([1,-1], N)
 
-T_step = 0.5
+T_step = 0.1 # Paso entre cada temperatura para la que se va a ejecutar
 for T in  np.arange(4.0, 0, -T_step):
     # T = 2 # Temperatura
+    T = round(T, 2)
     M = 100 # Número de medidas a realizar
     M0 = 20 # Número de pasos Monte Carlo hasta termalizar
     mc = 10 # Número de pasos Monte Carlo entre cada medida
@@ -63,6 +64,7 @@ for T in  np.arange(4.0, 0, -T_step):
     rm = rm/M
     rm2 = rm2/M - rm*rm
     c = (c/M - rm*rm)/rm2
+    tau = 0
     if c != 1.0: tau = c/(1.-c)
     error = np.sqrt(rm2*(2*tau+1)/M)
 
